@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Nova (myra-celestine) — FOREST DEPARTMENT</title>
+  <meta name="description" content="Personal portfolio of Nova (myra-celestine), FOREST DEPARTMENT.">
+  <meta name="theme-color" content="#fff0f4">
+  
+  <!-- Favicon and typography -->
+  <link rel="icon" type="image/png" href="./assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="antialiased overflow-x-hidden">
+
+  <!-- TOP DYNAMIC SCROLL PROGRESS INDICATOR -->
+  <div id="scroll-progress-bar" class="scroll-progress-bar"></div>
+
+  <!-- CINEMATIC LIGHT ENTRANCE SCREEN (BROWSER AUTOPLAY GATEWAY) -->
+  <div id="entrance-overlay" class="entrance-overlay">
+    <div class="entrance-content animate-enter">
+      <div class="entrance-logo-wrapper">
+        <img src="./assets/logo.png" alt="FOREST DEPARTMENT Logo" class="entrance-logo">
+        <div class="entrance-glow"></div>
+      </div>
+      <h1 class="entrance-title">NOVA</h1>
+      <p class="entrance-subtitle">myra-celestine • FOREST DEPARTMENT</p>
+      
+      <div class="entrance-enter-pill">
+        <span class="entrance-audio-icon">♫</span>
+        <span class="entrance-pill-text">Click Anywhere to Enter</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ambient Fluid Canvas Mesh -->
+  <canvas id="ambient-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+  <div class="ambient-glow ambient-glow-top"></div>
+  <div class="ambient-glow ambient-glow-bottom"></div>
+
+  <!-- Persistent Floating Dynamic Capsule Navigation & Audio Controller -->
+  <header class="fixed top-4 inset-x-0 z-50 flex justify-center px-3 sm:px-4 pointer-events-none">
+    <nav class="nav-island pointer-events-auto flex items-center justify-between gap-3 sm:gap-4 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full">
+      <!-- Brand Logo / Monogram -->
+      <a href="#about-top" class="flex items-center gap-2.5 group" style="text-decoration:none;">
+        <div class="logo-badge-img-wrapper">
+          <img src="./assets/logo.png" alt="FOREST DEPARTMENT Logo" class="w-7 h-7 object-cover">
+        </div>
+        <div class="flex flex-col text-left">
+          <span class="text-xs font-bold tracking-tight text-primary leading-tight">FOREST DEPARTMENT</span>
+          <span class="text-[9px] sm:text-[10px] text-pink font-mono tracking-wider leading-none">myra-celestine</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <ul class="nav-links text-xs font-medium">
+        <li><a href="#about-top" class="nav-link">About</a></li>
+        <li><a href="#department" class="nav-link">Department</a></li>
+        <li><a href="#connect" class="nav-link">Connect</a></li>
+      </ul>
+
+      <!-- Ambient Audio Controller Pill -->
+      <div class="flex items-center gap-1.5 sm:gap-2 pl-2 border-l border-divider">
+        <button id="audio-toggle-btn" class="audio-control-pill" aria-label="Toggle Soundtrack" title="Soundtrack: Active Audio">
+          <div class="equalizer-bars playing" id="eq-visualizer">
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+          </div>
+          <span class="audio-title-label text-[11px] font-mono max-w-[90px] truncate" id="audio-status-label">Soundtrack ♫</span>
+          <svg id="play-icon" class="w-3.5 h-3.5 fill-current hidden" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="pause-icon" class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-toggle" class="mobile-toggle-btn p-1 rounded-lg focus:outline-none" aria-label="Open menu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-menu" class="mobile-drawer hidden">
+    <div class="mobile-nav-links-list">
+      <a href="#about-top" class="mobile-nav-link">About Nova</a>
+      <a href="#department" class="mobile-nav-link">FOREST DEPARTMENT</a>
+      <a href="#connect" class="mobile-nav-link">Connect</a>
+    </div>
+    <div class="pt-6 border-t border-divider flex flex-col gap-3">
+      <div class="text-xs text-pink font-mono font-bold tracking-wider">SOUNDTRACK CONTROLLER</div>
+      <div class="flex items-center justify-between bg-card p-3 rounded-2xl border border-subtle">
+        <span class="text-xs sm:text-sm font-semibold text-primary">Active Soundtrack</span>
+        <button id="mobile-audio-toggle" class="px-3.5 py-1.5 bg-pink text-white font-semibold rounded-full text-xs shadow-md" style="background: linear-gradient(135deg, #f43f5e, #ec4899); border: none;">Play / Pause</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="relative z-10">
+
+    <!-- TOP SECTION: DISCORD PROFILE SHOWCASE ON LEFT, ABOUT ME ON RIGHT -->
+    <section id="about-top" class="top-showcase-section">
+      <div class="showcase-grid">
+        
+        <!-- Left Column: Discord Profile Showcase Card -->
+        <div class="profile-card-container scroll-reveal" style="--reveal-delay: 0.1s;">
+          <div class="discord-glass-card glass-panel floating-card" id="discord-card">
+            
+            <!-- Card Header / Floral Banner Preview -->
+            <div class="card-banner-preview relative">
+              <img src="./assets/banner.jpg" alt="Profile Banner" class="banner-img">
+              <div class="banner-overlay"></div>
+              <div class="banner-badge-wrapper">
+                <span class="badge-pill company-pill">🌸 • ୨୧</span>
+              </div>
+            </div>
+
+            <!-- Card Body Content -->
+            <div class="card-body-content">
+              
+              <!-- Avatar row with Status & Speech Bubble -->
+              <div class="avatar-action-row">
+                <div class="avatar-ring-container relative">
+                  <div class="avatar-glow"></div>
+                  <img src="./assets/avatar.jpg" alt="Nova (myra-celestine) Avatar" class="avatar-img">
+                  <span class="avatar-status-dot online-dot" title="Online 🌸"></span>
+                </div>
+
+                <!-- Speech Bubble & Expand Button -->
+                <div class="flex flex-col items-end gap-2 max-w-[220px]">
+                  <div class="discord-speech-bubble">
+                    <span class="speech-text">"ॐ नमो भगवते वासुदेवाय नमः" 🪈 ♾️</span>
+                  </div>
+                  <button id="view-profile-modal-btn" class="btn-mini-glass" title="Inspect Full Uncropped Screenshot">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+                    <span>Expand</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Identity Details (Display Name + Handle) -->
+              <div class="mt-3">
+                <div class="flex items-center gap-2">
+                  <h3 class="text-2xl font-bold tracking-tight text-primary">( муяα )</h3>
+                  <span class="badge-role">🌸 ୨୧</span>
+                </div>
+                <p class="text-sm font-mono text-pink mt-0.5 font-semibold">nova_vance56 <span class="text-tertiary font-normal">• She/Her</span></p>
+              </div>
+
+              <!-- VERIFIED DISCORD BADGES ROW -->
+              <div class="discord-badges-wrap mt-3.5">
+                <span class="discord-badge-pill" title="Community Tag">
+                  <span class="badge-icon">🌸</span>
+                  <span class="badge-text">୨୧</span>
+                </span>
+                <span class="discord-badge-pill" title="Organization">
+                  <span class="badge-icon">🌟</span>
+                  <span class="badge-text">Forest Leader</span>
+                </span>
+                <span class="discord-badge-pill" title="Status">
+                  <span class="badge-icon">✨</span>
+                  <span class="badge-text">Active</span>
+                </span>
+              </div>
+
+              <!-- Profile Direct Action Bar -->
+              <div class="discord-card-actions mt-4 pt-3.5 border-t border-divider flex items-center gap-2">
+                <a href="discord://-/users/nova_vance56" class="discord-msg-btn flex-1" title="Send direct message">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+                  <span>Message</span>
+                </a>
+                <button class="discord-icon-action-btn" title="Mutual Guilds" aria-label="Mutual Guilds">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                </button>
+                <button class="discord-icon-action-btn" title="More options" aria-label="More Options">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"/></svg>
+                </button>
+              </div>
+
+              <!-- Card Footer with Member Date & Live Pulse -->
+              <div class="mt-3.5 pt-3 border-t border-divider flex items-center justify-between text-xs text-secondary">
+                <span>Member Since: <strong class="text-primary font-medium">2 Aug 2026</strong></span>
+                <span class="text-pink font-mono flex items-center gap-1.5 font-semibold">
+                  <span class="w-2 h-2 rounded-full bg-pink inline-block" style="background-color: #f43f5e;"></span>
+                  Active
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Right Column: ABOUT ME WITH EXCLUSIVE BIO & DISCORD EMBED -->
+        <div class="about-side-container scroll-reveal" style="--reveal-delay: 0.2s;">
+          
+          <div class="glass-panel p-5 sm:p-8 rounded-3xl">
+            
+            <div class="flex items-center gap-2 mb-3">
+              <span class="status-dot"></span>
+              <span class="text-xs font-mono uppercase tracking-widest text-pink font-semibold">Profile Spotlight</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-primary tracking-tight leading-tight">
+              About Me
+            </h1>
+
+            <!-- BIO CONTAINER: ONLY WRITES "FOREST DEPARTMENT FEMALE LEADER" AS REQUESTED -->
+            <div class="bio-statement-box mt-4 sm:mt-5 p-5 sm:p-6 rounded-2xl bg-canvas border border-subtle">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-pink block mb-1.5 font-bold">Status / Bio</span>
+              <div class="text-2xl sm:text-3xl font-extrabold bio-gradient-heading tracking-wide leading-tight">
+                FOREST DEPARTMENT FEMALE LEADER
+              </div>
+            </div>
+
+            <!-- PROMINENT EMBEDDED DISCORD BUTTON (DEEP LINK TO NOVA_VANCE56) -->
+            <div class="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-divider">
+              <span class="text-xs font-mono text-tertiary uppercase tracking-wider block mb-2 font-medium">Discord Profile</span>
+              <a href="discord://-/users/nova_vance56" id="discord-app-btn" class="discord-embed-btn group" title="Open nova_vance56 in Discord App">
+                <div class="discord-btn-left">
+                  <div class="discord-icon-wrapper">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                  </div>
+                  <div class="discord-identity-text">
+                    <span class="discord-label">DISCORD APP USERNAME</span>
+                    <span class="discord-username-val">nova_vance56</span>
+                  </div>
+                </div>
+                <div class="discord-action-pill" id="discord-action-pill">
+                  <span id="discord-click-feedback">Open App ↗</span>
+                </div>
+              </a>
+            </div>
+
+            <!-- Quick Metrics Grid -->
+            <div class="grid grid-cols-3 gap-2 sm:gap-2.5 mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-divider text-center">
+              <div class="metric-mini-card">
+                <div class="metric-mini-val">Nova</div>
+                <div class="metric-mini-lbl">FOREST DEPARTMENT</div>
+              </div>
+              <div class="metric-mini-card">
+                <div class="metric-mini-val">Leader</div>
+                <div class="metric-mini-lbl">Administration</div>
+              </div>
+              <div class="metric-mini-card">
+                <div class="metric-mini-val">Active</div>
+                <div class="metric-mini-lbl">Operations</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- DEPARTMENT SPOTLIGHT: FOREST DEPARTMENT -->
+    <section id="department" class="section-container scroll-reveal" style="--reveal-delay: 0.15s; padding-top: 30px; padding-bottom: 50px;">
+      <div class="glass-panel p-5 sm:p-8 rounded-3xl">
+        
+        <!-- Header row with Logo and Identity -->
+        <div class="company-card-header">
+          <img src="./assets/logo.png" alt="FOREST DEPARTMENT Logo" class="company-logo-img">
+          <div class="company-header-info">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="badge-pill company-pill">ORGANIZATION</span>
+              <span class="text-[10px] sm:text-xs font-mono text-tertiary">DIGITAL SERVICES</span>
+            </div>
+            <h2 class="text-xl sm:text-3xl font-bold text-primary tracking-tight">FOREST DEPARTMENT</h2>
+          </div>
+        </div>
+
+        <p class="text-secondary text-sm mt-3 leading-relaxed">
+          Operations, digital communications, and server infrastructure under FOREST DEPARTMENT.
+        </p>
+        
+        <!-- Action Buttons -->
+        <div class="company-actions-row mt-5">
+          <a href="discord://-/users/nova_vance56" class="btn-primary">
+            <span>Connect on Discord</span>
+            <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+          <a href="https://discord.gg/9VjxW89S6A" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+            <span>Support Server</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- CONNECT SECTION -->
+    <section id="connect" class="section-container scroll-reveal" style="--reveal-delay: 0.2s; padding-top: 0; padding-bottom: 50px;">
+      <div class="glass-panel p-5 sm:p-8 rounded-3xl max-w-4xl mx-auto">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+          <div>
+            <h3 class="text-lg sm:text-xl font-bold text-primary">Direct Executive Connect</h3>
+            <p class="text-secondary text-xs mt-1">Direct inquiries, server coordination, and partnerships.</p>
+            <div class="flex flex-wrap items-center gap-3 mt-3 text-xs text-secondary font-mono">
+              <span>Discord: <a href="discord://-/users/nova_vance56" class="text-pink font-semibold hover:underline">nova_vance56</a></span>
+            </div>
+          </div>
+          <div class="connect-actions-group w-full sm:w-auto">
+            <a href="https://discord.gg/9VjxW89S6A" target="_blank" rel="noopener noreferrer" class="btn-secondary text-xs">
+              <span>Support Server</span>
+            </a>
+            <a href="https://discord.gg/QK8KJrZv55" target="_blank" rel="noopener noreferrer" class="btn-ghost text-xs">
+              <span>Community</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="border-t border-divider py-8 px-4 text-center text-xs text-tertiary">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div>
+        <span class="font-bold text-primary">FOREST DEPARTMENT</span>
+        <span>•</span>
+        <span>Nova (myra-celestine)</span>
+      </div>
+      <div class="font-mono text-[11px]">
+        © 2026 FOREST DEPARTMENT. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- LIGHTBOX MODAL FOR FULL DISCORD PROFILE SCREENSHOT -->
+  <div id="image-modal" class="image-modal hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="modal-content relative max-w-lg w-full glass-panel p-4 rounded-3xl">
+      <div class="flex items-center justify-between pb-3 border-b border-divider mb-3">
+        <span class="text-xs font-mono text-pink font-semibold">DISCORD_VERIFIED_PROFILE_RECORD</span>
+        <button id="close-modal-btn" class="p-1 rounded-full text-secondary hover:text-primary" aria-label="Close modal">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <img src="./assets/discord-profile.jpg" alt="Nova Discord Profile Uncut" class="w-full h-auto rounded-2xl shadow-2xl object-contain max-h-[75vh]">
+      <div class="mt-3 flex items-center justify-between text-xs text-tertiary font-mono">
+        <span>Verified Identity: nova_vance56</span>
+        <span>Member Since: 2 Aug 2026</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- AUDIO ELEMENT WITH DIRECT AUTOPLAY CAPABILITY -->
+  <audio id="theme-audio" src="./assets/theme-audio.mp3" preload="auto" loop></audio>
+
+  <!-- Main JavaScript Logic -->
+  <script src="./main.js"></script>
+</body>
+</html>

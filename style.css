@@ -1,0 +1,1078 @@
+/* ==========================================================================
+   Precision Fluid Spatial Motion & Light Pink Design System Stylesheet
+   Crafted with System Typography, Translucent Materials, and Squircles
+   Full Light Pink Theme • Zero External CSS Dependencies
+   ========================================================================== */
+
+:root {
+  /* System Typography Stack */
+  --font-system: system-ui, BlinkMacSystemFont, "Plus Jakarta Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+  
+  /* Semantic Canvas & Surface Tokens (Light Pink Theme) */
+  --system-bg: #fff0f4;
+  --system-canvas: #ffffff;
+  --card-surface: #ffffff;
+  --card-surface-tint: rgba(255, 240, 244, 0.6);
+  
+  /* Text & Label Tiers (Deep Plum Charcoal for Pristine Contrast) */
+  --label-primary: #2d151e;
+  --label-secondary: #745260;
+  --label-tertiary: #9c7887;
+  --label-quaternary: #c7a8b4;
+  
+  /* Semantic Light Pink & Rose Accent Colors */
+  --system-pink: #f43f5e;
+  --system-pink-hover: #e11d48;
+  --system-pink-active: #be123c;
+  --system-pink-subtle: rgba(244, 63, 94, 0.08);
+  --system-pink-border: rgba(244, 63, 94, 0.22);
+  --system-accent: #f43f5e;
+  --system-accent-gradient: linear-gradient(135deg, #f43f5e, #ec4899);
+  --system-soft-pink: #ffd6e0;
+  --system-blush: #fff5f7;
+  
+  /* Discord Branded Accents with Rose Harmonization */
+  --system-discord: #5865f2;
+  --system-discord-hover: #4752c4;
+  --system-discord-subtle: rgba(88, 101, 242, 0.08);
+  --system-discord-border: rgba(88, 101, 242, 0.22);
+  --system-green: #10b981;
+  --system-amber: #f59e0b;
+  
+  /* Translucent Optical Materials */
+  --material-ultra-thin: rgba(255, 255, 255, 0.7);
+  --material-thin: rgba(255, 255, 255, 0.85);
+  --material-regular: rgba(255, 255, 255, 0.95);
+  --material-border: rgba(244, 63, 94, 0.12);
+  --material-border-hover: rgba(244, 63, 94, 0.28);
+  --material-divider: rgba(244, 63, 94, 0.08);
+  
+  /* Spatial Depth & Drop Shadows with Soft Rose Specular Glows */
+  --card-shadow: 0 4px 24px rgba(244, 63, 94, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --card-shadow-hover: 0 16px 44px rgba(244, 63, 94, 0.14), 0 2px 10px rgba(244, 63, 94, 0.06);
+  --nav-shadow: 0 4px 24px rgba(244, 63, 94, 0.08), 0 1px 3px rgba(0, 0, 0, 0.03);
+  --glow-pink: 0 0 28px rgba(244, 63, 94, 0.25);
+  
+  /* Damped Spring Physics Easings */
+  --spring-easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --spring-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --smooth-duration: 0.35s;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-family: var(--font-system);
+  background-color: var(--system-bg);
+  color: var(--label-primary);
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background-color: var(--system-bg);
+  color: var(--label-primary);
+  line-height: 1.47059;
+}
+
+/* ==========================================================================
+   Scroll Progress Bar (Light Pink Gradient)
+   ========================================================================== */
+
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3.5px;
+  width: 0%;
+  background: linear-gradient(90deg, #f43f5e, #ec4899, #fb7185);
+  z-index: 105;
+  box-shadow: 0 1px 10px rgba(244, 63, 94, 0.45);
+  transition: width 0.1s linear;
+}
+
+/* ==========================================================================
+   Scroll-Driven Reveal & Smooth Motion System
+   ========================================================================== */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.75s var(--spring-easing), transform 0.75s var(--spring-easing);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Layout & Typography Utilities
+   ========================================================================== */
+
+.text-primary { color: var(--label-primary); }
+.text-secondary { color: var(--label-secondary); }
+.text-tertiary { color: var(--label-tertiary); }
+.text-pink { color: var(--system-pink); }
+.text-blue { color: var(--system-discord); }
+.bg-canvas { background-color: var(--system-canvas); }
+.bg-card { background-color: var(--card-surface); }
+.border-divider { border-color: var(--material-divider); }
+.border-subtle { border-color: var(--material-border); }
+
+/* ==========================================================================
+   Ambient Illumination & Glowing Canvas Backdrops (Light Pink Mode)
+   ========================================================================== */
+
+#ambient-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-glow {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(100px);
+  opacity: 0.6;
+  z-index: 0;
+  transition: opacity 0.5s ease;
+}
+
+.ambient-glow-top {
+  top: -120px;
+  right: -80px;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.18), rgba(236, 72, 153, 0.08), transparent 70%);
+}
+
+.ambient-glow-bottom {
+  bottom: -150px;
+  left: -100px;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(251, 113, 133, 0.16), rgba(253, 164, 175, 0.06), transparent 70%);
+}
+
+/* ==========================================================================
+   Card Surfaces & Translucent Materials (Light Pink Theme)
+   ========================================================================== */
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid var(--material-border);
+  box-shadow: var(--card-shadow);
+  border-radius: 28px;
+  transition: transform 0.4s var(--spring-easing), box-shadow 0.4s var(--spring-easing), border-color 0.4s ease;
+}
+
+.glass-panel:hover {
+  border-color: var(--material-border-hover);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.floating-card {
+  transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+  transform-style: preserve-3d;
+}
+
+/* ==========================================================================
+   Floating Navigation Island (Light Pink Theme Capsule)
+   ========================================================================== */
+
+.nav-island {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(24px) saturate(170%);
+  -webkit-backdrop-filter: blur(24px) saturate(170%);
+  border: 1px solid rgba(244, 63, 94, 0.18);
+  box-shadow: var(--nav-shadow);
+  transition: all 0.3s var(--spring-easing);
+  max-width: 860px;
+  width: 100%;
+}
+
+.logo-badge-img-wrapper {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(244, 63, 94, 0.15);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  flex-shrink: 0;
+}
+
+.logo-badge-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav-link {
+  color: var(--label-secondary);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.35rem 0.65rem;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--system-pink);
+  background: var(--system-pink-subtle);
+}
+
+/* Audio Control Capsule Pill in Nav */
+.audio-control-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  background: var(--system-pink-subtle);
+  border: 1px solid var(--system-pink-border);
+  color: var(--system-pink);
+  cursor: pointer;
+  transition: all 0.25s var(--spring-easing);
+  outline: none;
+}
+
+.audio-control-pill:hover {
+  background: rgba(244, 63, 94, 0.15);
+  transform: scale(1.03);
+}
+
+.audio-control-pill.playing {
+  background: linear-gradient(135deg, #f43f5e, #ec4899);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 2px 12px rgba(244, 63, 94, 0.35);
+}
+
+.equalizer-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+  width: 14px;
+}
+
+.eq-bar {
+  width: 2.5px;
+  background: currentColor;
+  border-radius: 1px;
+  height: 4px;
+  transition: height 0.2s ease;
+}
+
+.equalizer-bars.playing .eq-bar:nth-child(1) { animation: eqPulse 0.65s infinite ease-in-out alternate; }
+.equalizer-bars.playing .eq-bar:nth-child(2) { animation: eqPulse 0.45s infinite ease-in-out alternate 0.15s; }
+.equalizer-bars.playing .eq-bar:nth-child(3) { animation: eqPulse 0.75s infinite ease-in-out alternate 0.3s; }
+.equalizer-bars.playing .eq-bar:nth-child(4) { animation: eqPulse 0.55s infinite ease-in-out alternate 0.05s; }
+
+@keyframes eqPulse {
+  0% { height: 3px; }
+  100% { height: 13px; }
+}
+
+.mobile-toggle-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--label-primary);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .mobile-toggle-btn { display: flex; align-items: center; justify-content: center; }
+}
+
+/* ==========================================================================
+   TOP SHOWCASE SECTION: FIRST IMAGE ON LEFT/TOP, ABOUT ME ON RIGHT
+   ========================================================================== */
+
+.top-showcase-section {
+  padding-top: 96px;
+  padding-bottom: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: 390px 1fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Discord Glass Showcase Card */
+.discord-glass-card {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgba(244, 63, 94, 0.15);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: all 0.35s var(--spring-easing);
+}
+
+.card-banner-preview {
+  position: relative;
+  height: 115px;
+  overflow: hidden;
+  background: #ffe8ee;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.discord-glass-card:hover .banner-img {
+  transform: scale(1.03);
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(244, 63, 94, 0.1) 0%, rgba(255, 255, 255, 0.25) 100%);
+}
+
+.banner-badge-wrapper {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 2;
+}
+
+.card-body-content {
+  padding: 1rem 1.25rem 1.25rem;
+  position: relative;
+}
+
+.avatar-action-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: -46px;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 3;
+}
+
+.avatar-ring-container {
+  width: 86px;
+  height: 86px;
+  position: relative;
+  border-radius: 50%;
+  padding: 3px;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(244, 63, 94, 0.2);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.avatar-glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f43f5e, #ec4899);
+  z-index: -1;
+  opacity: 0.6;
+  filter: blur(4px);
+}
+
+.avatar-status-dot {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2.5px solid #ffffff;
+}
+
+.online-dot { background-color: #10b981; }
+.idle-dot { background-color: #f59e0b; }
+
+/* Speech Bubble in Discord Card */
+.discord-speech-bubble {
+  background: #ffffff;
+  border: 1px solid rgba(244, 63, 94, 0.15);
+  box-shadow: 0 2px 10px rgba(244, 63, 94, 0.08);
+  border-radius: 16px;
+  padding: 0.45rem 0.75rem;
+  position: relative;
+  font-size: 0.73rem;
+  color: var(--label-primary);
+  line-height: 1.35;
+  text-align: right;
+  font-weight: 500;
+}
+
+.btn-mini-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--system-pink);
+  background: var(--system-pink-subtle);
+  border: 1px solid var(--system-pink-border);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-mini-glass:hover {
+  background: rgba(244, 63, 94, 0.16);
+  transform: translateY(-1px);
+}
+
+.badge-role {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: var(--system-pink-subtle);
+  color: var(--system-pink);
+  border: 1px solid var(--system-pink-border);
+}
+
+.discord-badges-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.discord-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 9999px;
+  background: var(--system-pink-subtle);
+  border: 1px solid var(--system-pink-border);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--label-primary);
+}
+
+.discord-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.discord-msg-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: linear-gradient(135deg, #f43f5e, #ec4899);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.55rem 1rem;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 3px 12px rgba(244, 63, 94, 0.25);
+  transition: all 0.2s var(--spring-easing);
+}
+
+.discord-msg-btn:hover {
+  background: linear-gradient(135deg, #e11d48, #db2777);
+  box-shadow: 0 5px 18px rgba(244, 63, 94, 0.35);
+  transform: translateY(-1px);
+}
+
+.discord-icon-action-btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid rgba(244, 63, 94, 0.16);
+  border-radius: 12px;
+  color: var(--label-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.discord-icon-action-btn:hover {
+  background: var(--system-pink-subtle);
+  color: var(--system-pink);
+  border-color: var(--system-pink-border);
+}
+
+/* ==========================================================================
+   ABOUT ME SECTION & BIO STATEMENT BOX (LIGHT PINK THEME)
+   ========================================================================== */
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--system-pink);
+  box-shadow: 0 0 8px rgba(244, 63, 94, 0.6);
+  display: inline-block;
+}
+
+.bio-statement-box {
+  background: #ffffff;
+  border: 1.5px solid rgba(244, 63, 94, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 4px 18px rgba(244, 63, 94, 0.07);
+  transition: all 0.3s ease;
+}
+
+.bio-statement-box:hover {
+  border-color: rgba(244, 63, 94, 0.35);
+  box-shadow: 0 8px 26px rgba(244, 63, 94, 0.12);
+}
+
+.bio-gradient-heading {
+  background: linear-gradient(135deg, #be123c 0%, #e11d48 50%, #db2777 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* PROMINENT EMBEDDED DISCORD BUTTON */
+.discord-embed-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: #ffffff;
+  border: 1.5px solid rgba(244, 63, 94, 0.2);
+  padding: 0.85rem 1.15rem;
+  border-radius: 20px;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(244, 63, 94, 0.08);
+  transition: all 0.25s var(--spring-easing);
+  cursor: pointer;
+}
+
+.discord-embed-btn:hover {
+  border-color: var(--system-pink);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(244, 63, 94, 0.18);
+  background: #fff8f9;
+}
+
+.discord-btn-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.discord-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f43f5e, #ec4899);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 3px 12px rgba(244, 63, 94, 0.3);
+}
+
+.discord-identity-text {
+  display: flex;
+  flex-col;
+  text-align: left;
+}
+
+.discord-label {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: var(--label-tertiary);
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  display: block;
+}
+
+.discord-username-val {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--label-primary);
+  font-family: var(--font-mono);
+  display: block;
+}
+
+.discord-action-pill {
+  padding: 0.45rem 0.9rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #f43f5e, #ec4899);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 10px rgba(244, 63, 94, 0.3);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.discord-embed-btn:hover .discord-action-pill {
+  transform: scale(1.05);
+  box-shadow: 0 4px 14px rgba(244, 63, 94, 0.45);
+}
+
+/* Quick Metrics Cards */
+.metric-mini-card {
+  background: #ffffff;
+  border: 1px solid rgba(244, 63, 94, 0.14);
+  padding: 0.85rem 0.5rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(244, 63, 94, 0.04);
+}
+
+.metric-mini-val {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--label-primary);
+}
+
+.metric-mini-lbl {
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  color: var(--label-tertiary);
+  margin-top: 0.25rem;
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   Section Container & Department Card Header (Light Pink Theme)
+   ========================================================================== */
+
+.section-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.company-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.company-logo-img {
+  width: 68px;
+  height: 68px;
+  border-radius: 18px;
+  object-fit: cover;
+  border: 1.5px solid rgba(244, 63, 94, 0.2);
+  box-shadow: 0 4px 16px rgba(244, 63, 94, 0.15);
+  background: #ffffff;
+}
+
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.company-pill {
+  background: rgba(244, 63, 94, 0.1);
+  color: var(--system-pink);
+  border: 1px solid rgba(244, 63, 94, 0.25);
+}
+
+.company-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #f43f5e, #ec4899);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.65rem 1.35rem;
+  border-radius: 14px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(244, 63, 94, 0.28);
+  transition: all 0.2s var(--spring-easing);
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #e11d48, #db2777);
+  box-shadow: 0 6px 22px rgba(244, 63, 94, 0.38);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #ffffff;
+  color: var(--label-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.65rem 1.35rem;
+  border-radius: 14px;
+  text-decoration: none;
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  box-shadow: 0 2px 8px rgba(244, 63, 94, 0.05);
+  transition: all 0.2s var(--spring-easing);
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: var(--system-pink-subtle);
+  border-color: var(--system-pink-border);
+  color: var(--system-pink);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--label-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.6rem 1.15rem;
+  border-radius: 14px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.btn-ghost:hover {
+  background: var(--system-pink-subtle);
+  color: var(--system-pink);
+}
+
+.connect-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+/* ==========================================================================
+   Mobile Drawer Menu (Light Pink Material)
+   ========================================================================== */
+
+.mobile-drawer {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 240, 244, 0.96);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  z-index: 100;
+  padding: 5rem 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mobile-drawer.hidden {
+  display: none;
+}
+
+.mobile-nav-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.mobile-nav-link {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--label-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.mobile-nav-link:hover {
+  color: var(--system-pink);
+}
+
+/* ==========================================================================
+   Cinematic Entrance Screen (Light Pink Theme)
+   ========================================================================== */
+
+.entrance-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 45%, #ffffff 0%, #fff0f4 55%, #ffd6e0 100%);
+  cursor: pointer;
+  transition: opacity 0.65s var(--spring-easing), visibility 0.65s var(--spring-easing);
+  padding: 1.5rem;
+}
+
+.entrance-overlay.dismissed {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.entrance-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 440px;
+}
+
+.entrance-logo-wrapper {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  border-radius: 28px;
+  padding: 6px;
+  background: #ffffff;
+  box-shadow: 0 12px 36px rgba(244, 63, 94, 0.22);
+  border: 2px solid rgba(244, 63, 94, 0.25);
+  margin-bottom: 1.5rem;
+}
+
+.entrance-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 22px;
+}
+
+.entrance-glow {
+  position: absolute;
+  inset: -6px;
+  border-radius: 34px;
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.35), transparent 70%);
+  z-index: -1;
+  animation: pulseLogoGlow 2.5s infinite ease-in-out;
+}
+
+@keyframes pulseLogoGlow {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 0.85; }
+}
+
+.entrance-title {
+  font-size: 2.75rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--label-primary);
+  margin-bottom: 0.35rem;
+  line-height: 1.05;
+}
+
+.entrance-subtitle {
+  font-size: 0.95rem;
+  font-family: var(--font-mono);
+  color: var(--system-pink);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 2rem;
+}
+
+.entrance-enter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: #ffffff;
+  color: var(--label-primary);
+  padding: 0.75rem 1.6rem;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border: 1.5px solid rgba(244, 63, 94, 0.3);
+  box-shadow: 0 8px 24px rgba(244, 63, 94, 0.16);
+  transition: all 0.25s var(--spring-easing);
+  animation: bounceGently 2s infinite ease-in-out;
+}
+
+.entrance-enter-pill:hover {
+  border-color: var(--system-pink);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(244, 63, 94, 0.3);
+}
+
+.entrance-audio-icon {
+  color: var(--system-pink);
+  font-size: 1.1rem;
+}
+
+@keyframes bounceGently {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* ==========================================================================
+   Modal Lightbox
+   ========================================================================== */
+
+.image-modal {
+  background: rgba(45, 21, 30, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: opacity 0.3s ease;
+}
+
+.image-modal.hidden {
+  display: none;
+}
+
+/* ==========================================================================
+   Responsive Grid & Utility Helpers
+   ========================================================================== */
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: 0.25rem; }
+.gap-1\.5 { gap: 0.375rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-2\.5 { gap: 0.625rem; }
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+.gap-5 { gap: 1.25rem; }
+.grid { display: grid; }
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.fixed { position: fixed; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.w-full { width: 100%; }
+.h-auto { height: auto; }
+.rounded-full { border-radius: 9999px; }
+.rounded-2xl { border-radius: 1rem; }
+.rounded-3xl { border-radius: 1.5rem; }
+.p-4 { padding: 1rem; }
+.p-5 { padding: 1.25rem; }
+.px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+.text-center { text-align: center; }
+.text-xs { font-size: 0.75rem; }
+.text-sm { font-size: 0.875rem; }
+.text-2xl { font-size: 1.5rem; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+.font-mono { font-family: var(--font-mono); }
+.tracking-tight { letter-spacing: -0.025em; }
+.tracking-wide { letter-spacing: 0.025em; }
+.tracking-wider { letter-spacing: 0.05em; }
+.tracking-widest { letter-spacing: 0.1em; }
+.uppercase { text-transform: uppercase; }
+.block { display: block; }
+.hidden { display: none !important; }
+.z-0 { z-index: 0; }
+.z-10 { z-index: 10; }
+.z-50 { z-index: 50; }
+.pointer-events-none { pointer-events: none; }
+.pointer-events-auto { pointer-events: auto; }
+.max-w-4xl { max-width: 56rem; }
+.max-w-5xl { max-width: 64rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.mt-0\.5 { margin-top: 0.125rem; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-3\.5 { margin-top: 0.875rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-5 { margin-top: 1.25rem; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-1\.5 { margin-bottom: 0.375rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.pt-3 { padding-top: 0.75rem; }
+.pt-3\.5 { padding-top: 0.875rem; }
+.pt-4 { padding-top: 1rem; }
+.pb-3 { padding-bottom: 0.75rem; }
+.border-t { border-top-width: 1px; }
+.border-b { border-bottom-width: 1px; }
+.border-l { border-left-width: 1px; }
+.w-3\.5 { width: 0.875rem; }
+.h-3\.5 { height: 0.875rem; }
+.w-4 { width: 1rem; }
+.h-4 { height: 1rem; }
+.w-5 { width: 1.25rem; }
+.h-5 { height: 1.25rem; }
+.w-7 { width: 1.75rem; }
+.h-7 { height: 1.75rem; }
+.fill-current { fill: currentColor; }
+.overflow-hidden { overflow: hidden; }
