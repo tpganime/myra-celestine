@@ -1683,3 +1683,157 @@ header {
   color: #ffffff !important;
   border-color: rgba(255, 255, 255, 0.2) !important;
 }
+
+/* ==========================================================================
+   AMOLED Black About Me Card & Inner Components
+   ========================================================================== */
+
+.about-side-container .glass-panel {
+  background: #111214 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), 0 0 24px rgba(244, 63, 94, 0.18) !important;
+  color: #f2f3f5 !important;
+}
+
+.about-side-container .glass-panel:hover {
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.55), 0 0 32px rgba(244, 63, 94, 0.28) !important;
+  border-color: rgba(244, 63, 94, 0.35) !important;
+}
+
+.about-side-container h1,
+.about-side-container .text-primary {
+  color: #f2f3f5 !important;
+}
+
+.about-side-container .text-secondary {
+  color: #b5bac1 !important;
+}
+
+.about-side-container .text-tertiary {
+  color: #949ba4 !important;
+}
+
+.about-side-container .border-divider {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Inner Bio Statement Box in Dark Mode */
+.about-side-container .bio-statement-box {
+  background: #18191c !important;
+  border: 1.5px solid rgba(244, 63, 94, 0.32) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
+}
+
+.about-side-container .bio-statement-box:hover {
+  border-color: rgba(244, 63, 94, 0.55) !important;
+  box-shadow: 0 8px 26px rgba(244, 63, 94, 0.25) !important;
+}
+
+.about-side-container .bio-gradient-heading {
+  background: linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #fb7185 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Inner Discord Embed Button in Dark Mode */
+.about-side-container .discord-embed-btn {
+  background: #18191c !important;
+  border: 1.5px solid rgba(244, 63, 94, 0.3) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+}
+
+.about-side-container .discord-embed-btn:hover {
+  background: #1e1f22 !important;
+  border-color: #f43f5e !important;
+  box-shadow: 0 8px 24px rgba(244, 63, 94, 0.28) !important;
+}
+
+.about-side-container .discord-username-val {
+  color: #f2f3f5 !important;
+}
+
+.about-side-container .discord-label {
+  color: #949ba4 !important;
+}
+
+.about-side-container .discord-action-pill {
+  background: linear-gradient(135deg, #f43f5e, #ec4899) !important;
+  box-shadow: 0 2px 10px rgba(244, 63, 94, 0.45) !important;
+}
+
+/* Inner Metric Mini Cards in Dark Mode */
+.about-side-container .metric-mini-card {
+  background: #18191c !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25) !important;
+}
+
+.about-side-container .metric-mini-val {
+  color: #f2f3f5 !important;
+}
+
+.about-side-container .metric-mini-lbl {
+  color: #949ba4 !important;
+}
+
+/* Department & Connect Panels in AMOLED Black */
+#department .glass-panel,
+#connect .glass-panel {
+  background: #111214 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), 0 0 24px rgba(244, 63, 94, 0.18) !important;
+  color: #f2f3f5 !important;
+}
+
+#department .glass-panel:hover,
+#connect .glass-panel:hover {
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.55), 0 0 32px rgba(244, 63, 94, 0.28) !important;
+  border-color: rgba(244, 63, 94, 0.35) !important;
+}
+
+#department .text-primary,
+#connect .text-primary {
+  color: #f2f3f5 !important;
+}
+
+#department .text-secondary,
+#connect .text-secondary {
+  color: #b5bac1 !important;
+}
+
+#department .text-tertiary,
+#connect .text-tertiary {
+  color: #949ba4 !important;
+}
+
+#department .company-logo-img {
+  border-color: rgba(244, 63, 94, 0.4) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+}
+
+#department .btn-secondary,
+#connect .btn-secondary {
+  background: #1e1f22 !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  color: #f2f3f5 !important;
+}
+
+#department .btn-secondary:hover,
+#connect .btn-secondary:hover {
+  background: rgba(244, 63, 94, 0.2) !important;
+  border-color: rgba(244, 63, 94, 0.4) !important;
+  color: #ffffff !important;
+}
+
+#connect .btn-ghost {
+  color: #949ba4 !important;
+}
+
+#connect .btn-ghost:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+#connect .border-divider {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
