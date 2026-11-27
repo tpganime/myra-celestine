@@ -1837,3 +1837,24 @@ header {
 #connect .border-divider {
   border-color: rgba(255, 255, 255, 0.1) !important;
 }
+
+/* Centered Showcase for Single-Hero Layout */
+.top-showcase-section {
+  padding-top: 104px;
+  padding-bottom: 60px;
+  max-width: 1120px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 880px) {
+  .top-showcase-section {
+    min-height: auto;
+    padding-top: 96px !important;
+    padding-bottom: 48px !important;
+    display: block;
+  }
+}
