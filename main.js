@@ -1,6 +1,6 @@
 /**
  * Precision Fluid Motion & Audio Engine
- * Nova (myra-celestine) — FOREST DEPARTMENT
+ * Nova (myra-celestine)
  * Light Pink Theme Edition
  */
 
